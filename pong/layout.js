@@ -13,6 +13,6 @@ function draw()
     background(0);
     userpaddle.display();
     aipaddle.display();
-    stroke(255)
+    stroke(255);
     line(width / 2, 0, width / 2, height);
 }
