@@ -1,0 +1,18 @@
+body
+{
+    background-color: red;
+    margin: 0;
+    padding: 0;
+}
+#header
+{
+    color: red;
+}
+#header:hover
+{
+    color: white;
+}
+canvas
+{
+    display: block;
+}
