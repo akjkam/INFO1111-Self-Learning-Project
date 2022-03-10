@@ -8,8 +8,8 @@ class Paddle
         this.height = 90;
         this.width = 20;
         //Define status of paddle(going up or down), initially stationary
-        this.isup = False;
-        this.isdown = False;
+        this.isup = false;
+        this.isdown = false;
     }
     // Create Paddle
     display()
