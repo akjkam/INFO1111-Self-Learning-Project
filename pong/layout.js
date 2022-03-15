@@ -36,6 +36,8 @@ function draw()
         }
     }
     ball.display();
+    ball.update();
+    ball.hitPlay(userpaddle);
 
 }
 
