@@ -20,11 +20,11 @@ class Paddle
     //Setting paddle movement
     up()
     {
-        this.y -= 2;
+        this.y -= 2.5;
     }
 
     down()
     {
-        this.y += 2;
+        this.y += 2.5;
     }
 }
