@@ -9,4 +9,4 @@ LEVEL 3 Proposal:
 Add vertical collision
 Add basic paddle controlled by ai (up or down movement based on position of ball),
 Add score system
-Add sound/music, background and when hit collision detected
+Add sound/music to background and when hit collision detected
