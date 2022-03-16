@@ -23,6 +23,7 @@ function draw()
     //Move paddle based on user input within canvas
     if (userpaddle.isup == true)
     {
+        //Making sure the paddle can't be moved off screen
         if (userpaddle.y > 0)
         {
             userpaddle.up();
@@ -30,6 +31,7 @@ function draw()
     }
     else if (userpaddle.isdown == true)
     {
+        //Making sure the paddle can't be moved off screen
         if (userpaddle.y < height - userpaddle.height)
         {
             userpaddle.down();
@@ -41,7 +43,7 @@ function draw()
 
 }
 
-//User input
+//Functions to register user input
 function keyPressed()
 {
     if (keyCode == UP_ARROW)
