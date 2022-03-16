@@ -13,6 +13,7 @@ class Ball
         {
             this.yVel = -this.yVel;
         }
+        //If ball hits the halfway line/net, it changes direction
         if (this.x > width / 2)
         {
             this.xVel = -this.xVel;
@@ -34,12 +35,17 @@ class Ball
         fill(c);
         ellipse(this.x, this.y, this.r * 2, this.r * 2);
     }
-    //Reset Ball
+    //Define initial ball properties and also resets ball
     reset()
     {
         this.x = width / 2;
         this.y = height / 2;
-        //Defining random direction of ball on reset
+        /*
+        Defining random direction of ball on reset
+        Uses random function from p5 instead of Math.random since Math.random
+        only returns a number from 0-1 which makes the ball velocity very slow
+        */
+        
         this.xVel = random(4, 5);
         this.yVel = random(-3, 5);
     }
