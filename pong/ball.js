@@ -23,7 +23,7 @@ class Ball
         {
             this.reset();
         }
-        //Moving ball
+        //Moving ball in set direction
         this.x += this.xVel;
         this.y += this.yVel;
     }
@@ -56,7 +56,9 @@ class Ball
         {
             //Check if height matches
             if (this.y >= player.y && this.y <= player.y + player.height)
+            {
                 this.xVel = -this.xVel;
+            }
         }
     }
 }
