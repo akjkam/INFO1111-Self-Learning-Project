@@ -17,14 +17,33 @@ class Paddle
         fill(255);
         rect(this.x, this.y, this.width, this.height);
     }
-    //Setting paddle movement
+    //Setting paddle movement, need checks to prevent ai paddle from moving off screen
     up()
     {
-        this.y -= 2.5;
+        if (this.y > 0)
+        {
+            this.y -= 2.5;
+        } 
+        
     }
 
     down()
     {
-        this.y += 2.5;
+        if (this.y < height - this.height)
+        {
+            this.y += 2.5;
+        }
+    }
+    //Update function for ai paddle
+    update()
+    {
+        if (this.isup)
+        {
+            this.up();
+        }
+        else if (this.isdown)
+        {
+            this.down();
+        }
     }
 }
