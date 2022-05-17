@@ -6,21 +6,22 @@ class Ball
         this.reset();
     }
     //Update ball position
-    update()
+    update(userscore, aiscore)
     {
         //If ball hits the top or bottom, it changes direction
         if (this.y < this.r || this.y > height - this.r)
         {
             this.yVel = -this.yVel;
         }
-        //If ball hits the halfway line/net, it changes direction
-        if (this.x > width / 2)
+        //If ball hits the left or right side of screen, update score and restart game
+        if (this.x < this.r)
         {
-            this.xVel = -this.xVel;
+            aiscore.increment();
+            this.reset();
         }
-        //If ball hits the left or right side of screen, restart game
-        if (this.x < this.r || this.x > width + this.r)
+        else if (this.x > width + this.r)
         {
+            userscore.increment();
             this.reset();
         }
         //Moving ball in set direction
@@ -56,6 +57,16 @@ class Ball
         {
             //Check if height matches
             if (this.y >= player.y && this.y <= player.y + player.height)
+            {
+                this.xVel = -this.xVel;
+            }
+        }
+    }
+    hitAi(ai)
+    {
+        if (this.x + this.r >= ai.x && this.x <= ai.x + ai.width)
+        {
+            if (this.y >= ai.y && this.y <= ai.y + ai.height)
             {
                 this.xVel = -this.xVel;
             }
