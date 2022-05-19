@@ -8,8 +8,8 @@ class Paddle
         this.height = 90;
         this.width = 20;
         //Define status of paddle(going up or down), initially stationary
-        this.isup = false;
-        this.isdown = false;
+        this.isUp = false;
+        this.isDown = false;
     }
     // Create Paddle
     display()
@@ -37,11 +37,11 @@ class Paddle
     //Update function for ai paddle
     update()
     {
-        if (this.isup)
+        if (this.isUp)
         {
             this.up();
         }
-        else if (this.isdown)
+        else if (this.isDown)
         {
             this.down();
         }
