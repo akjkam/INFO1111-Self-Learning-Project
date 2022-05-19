@@ -1,99 +1,128 @@
-let userpaddle;
-let aipaddle;
+let userPaddle;
+let aiPaddle;
 let ball;
-let userscore;
-let aiscore;
+let userScore;
+let aiScore;
+let paddleEffect;
+let wallEffect;
+let scoreEffect;
+let mode;
+//Preload function to load audio effects
+function preload()
+{
+    paddleEffect = loadSound("sounds/paddlehit.m4a");
+    wallEffect = loadSound("sounds/wallhit.m4a");
+    scoreEffect = loadSound("sounds/scoreupdate.m4a");
+}
 //Define canvas and two paddles
 function setup()
 {
+    //Initially in start menu
+    mode = 0;
     createCanvas(800, 500);
     //Initialzie paddles, balls, scores
-    userpaddle = new Paddle(25);
-    aipaddle = new Paddle(width - 45);
+    userPaddle = new Paddle(0);
+    aiPaddle = new Paddle(width - 20);
     ball = new Ball();
-    userscore = new Score(width / 2 - 40);
-    aiscore = new Score(width / 2 + 40);
+    userScore = new Score(width / 2 - 40);
+    aiScore = new Score(width / 2 + 40);
+
 }
 
 //Draw onto page
 function draw()
 {
-    background(0);
-    userpaddle.display();
-    aipaddle.display();
-    userpaddle.update();
-    aipaddle.update();
-    aiscore.display();
-    userscore.display();
-    aiFunc();
-    //Draw net/line
-    stroke(255);
-    line(width / 2, 0, width / 2, height);
-    //Move paddle based on user input within canvas
-    if (userpaddle.isup == true)
+    //Start Menu
+    if (mode == 0)
     {
-        //Making sure the paddle can't be moved off screen
-        if (userpaddle.y > 0)
-        {
-            userpaddle.up();
-        }
+        textSize(40);
+        text("Press ENTER to start", 120, 140);
     }
-    else if (userpaddle.isdown == true)
+    else
+    //Game
     {
-        //Making sure the paddle can't be moved off screen
-        if (userpaddle.y < height - userpaddle.height)
+        background(0);
+        userPaddle.display();
+        aiPaddle.display();
+        userPaddle.update();
+        aiPaddle.update();
+        aiScore.display();
+        userScore.display();
+        aiFunc();
+        //Draw net/line
+        stroke(255);
+        line(width / 2, 0, width / 2, height);
+        //Move paddle based on user input within canvas
+        if (userPaddle.isUp == true)
         {
-            userpaddle.down();
+            //Making sure the paddle can't be moved off screen
+            if (userPaddle.y > 0)
+            {
+                userPaddle.up();
+            }
         }
+        else if (userPaddle.isDown == true)
+        {
+            //Making sure the paddle can't be moved off screen
+            if (userPaddle.y < height - userPaddle.height)
+            {
+                userPaddle.down();
+            }
+        }
+        ball.display();
+        ball.update(userScore, aiScore);
+        ball.hitPlay(userPaddle);
+        ball.hitAi(aiPaddle);
     }
-    ball.display();
-    ball.update(userscore, aiscore);
-    ball.hitPlay(userpaddle);
-    ball.hitAi(aipaddle);
 
 }
 //Function for ai movement
 function aiFunc()
 {
-    let mid = aipaddle.y + aipaddle.height / 2;
+    let mid = aiPaddle.y + (aiPaddle.height / 2);
     //If ball is above middle of paddle, move paddle up, else move paddle down
-    if (mid + 2.5 > ball.y)
+    if (mid + 10 > ball.y)
     {
-        aipaddle.isup = true;
-        aipaddle.isdown = false;
+        aiPaddle.isUp = true;
+        aiPaddle.isDown = false;
     }
-    else if (mid - 2.5 < ball.y)
+    else if (mid - 10 < ball.y)
     {
-        aipaddle.isup = false;
-        aipaddle.isdown = true;
+        aiPaddle.isUp = false;
+        aiPaddle.isDown = true;
     }
-    //If ball is within 5 units of mid of paddle, set y value to ball y value to limit jittering
+    //If ball is within 10 units of mid of paddle, set y value to ball y value to limit jittering
     else
     {
-        aipaddle.y = ball.y;
+        aiPaddle.y = ball.y;
     }
 }
 
 //Functions to register user input
 function keyPressed()
 {
-    if (keyCode == UP_ARROW)
+    if (keyCode == ENTER)
     {
-        userpaddle.isup = true;
+        mode = 1;
+    }
+    else if (keyCode == UP_ARROW)
+    {
+        userPaddle.isUp = true;
     }
     else if (keyCode == DOWN_ARROW)
     {
-        userpaddle.isdown = true;
+        userPaddle.isDown = true;
     }
+
 }
 function keyReleased()
 {
     if (keyCode == UP_ARROW)
     {
-        userpaddle.isup = false;
+        userPaddle.isUp = false;
     }
     else if (keyCode == DOWN_ARROW)
     {
-        userpaddle.isdown = false;
+        userPaddle.isDown = false;
     }
 }
